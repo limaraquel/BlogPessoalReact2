@@ -2,7 +2,7 @@ import axios from "axios";
 import { url } from "inspector";
 
 export const api = axios.create({
-    baseURL: 'https://bloggeneration.herokuapp.com/'
+    baseURL: 'https://bloglimaraquell.herokuapp.com/'
 })
 
 export const cadastroUsuario = async(url: any, dados: any, setDado: any) => {
