@@ -6,16 +6,29 @@ import useLocalStorage from 'react-use-localstorage';
 import {useHistory} from 'react-router-dom';
 import Tema from '../../../../models/Tema';
 import { busca } from '../../../../services/Service';
-
+import { toast } from 'react-toastify';
+import { TokenState } from '../../../../store/tokens/tokensReducer';
+import { useSelector } from 'react-redux';
 
 function ListaTema() {
   const [temas, setTemas] = useState<Tema[]>([])
-  const [token, setToken] = useLocalStorage('token');
   let history = useHistory();
+  const token = useSelector<TokenState, TokenState["tokens"]>(
+    (state) => state.tokens
+  );
 
   useEffect(()=>{
     if(token == ''){
-      alert("Você precisa estar logado")
+      toast.error('Você precisa estar logado', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        theme: "colored",
+        progress: undefined,
+        });
       history.push("/login")
     }
   }, [token])
